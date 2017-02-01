@@ -1,4 +1,4 @@
-# Sonobabble
+# Sonobabble [![Build Status][travis badge]][travis]
 A social network for sound
 
 ## Why?
@@ -20,6 +20,9 @@ I have no idea. I’m hoping for [March 31, 2017][march 31 2017 timer] (maybe?).
 ## Who?
 Me, primarily. If you somehow stumbled here and want to make a pull request, go
 ahead!
+
+[travis badge]: https://travis-ci.org/skunkmb/sonobabble.svg?branch=master
+[travis]: https://travis-ci.org/skunkmb/sonobabble
 
 [facebook]: https://facebook.com
 [twitter]: https://twitter.com
