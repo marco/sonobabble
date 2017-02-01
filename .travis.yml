@@ -1,3 +1,6 @@
 language: go
 
 go: 1.7.4
+
+install:
+	go get github.com/gorrilla/mux
