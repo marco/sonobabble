@@ -1,0 +1,82 @@
+<!-- NOTE: This code looks best when viewed with a tab-width of 2. -->
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Welcome to Sonobabble
+		</title>
+		<link rel="stylesheet" href="installed/normalize.css">
+		<link rel="stylesheet" href="homepage.css">
+		<link rel="stylesheet" href="master.css">
+		<script src="installed/smooth-scroll.js"></script>
+	</head>
+	<body>
+		<div id="top-page" class="full-window-centered-div">
+			<h1 class="logo-extra-large">
+				Sonobabble
+			</h1>
+			<h2 class="tagline-extra-large">
+				discover a sound
+			</h2>
+			<a data-scroll href="#bottom-page">
+				<img class="bottom-of-viewport-button-large"
+					src="resources/homepage-down-arrow.png" alt="Down arrow" width="250"
+					height="70"/>
+			</a>
+		</div>
+		<div id="bottom-page" class="full-window-centered-div">
+			<a data-scroll href="#top-page">
+				<img class="top-of-viewport-button-large"
+					src="resources/homepage-up-arrow.png" alt="Up arrow" width="250"
+					height="70"/>
+			</a>
+			<div class="bottom-page-content-container">
+				<div class="description-paragraphs-container">
+					<p class="text-medium">
+						Every day, billions of people communicate using the same tool:
+						the spoken word. And yet all the major social networks focus on
+						pictures and text.
+					</p>
+					<p class="text-medium">
+						It’s time for a change.
+					</p>
+					<p class="text-medium">
+						It’s time for Sonobabble, the first social network made for
+						sound.
+					</p>
+				</div>
+				<section class="squarish-panel-large">
+					<form onsubmit="signUp()">
+						<div class="label-and-textfield-large-container">
+							<label for="username">
+								Username
+							</label>
+							<input id="username" name="username"
+								type="text" placeholder="john_smith" />
+						</div>
+						<div class="label-and-textfield-large-container">
+							<label class="label-with-textfield-large" for="email">
+								Email
+							</label>
+							<input id="email" name="username" type="text"
+								placeholder="johnsmith@example.com" />
+						</div>
+						<div class="label-and-textfield-large-container">
+							<label class="label-with-textfield-large" for="password">
+								Password
+							</label>
+							<input id="password" name="username" type="password"
+								placeholder="•••••••••••••••••" />
+						</div>
+						<input class="button-large" type="submit" value="Sign Up" />
+					</form>
+				</section>
+			</div>
+		</div>
+		<script>
+			smoothScroll.init();
+		</script>
+	</body>
+</html>

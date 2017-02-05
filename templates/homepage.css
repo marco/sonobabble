@@ -1,0 +1,227 @@
+/*
+	NOTE: This code looks best when viewed with a tab-width of 8.
+
+	NOTE: This file is intended for styling of homepage.html-specific
+	styles ONLY, because there are quite a few of them. For more general
+	styles that are used throughout the interface, please use master.css.
+*/
+body {
+	min-width: 600px;
+}
+
+.full-window-centered-div {
+	/*
+		vh is a measurement equal to 1% of the current viewport height.
+		Therefore, 100vh is 100% of the viewport height.
+	*/
+	height: 100vh;
+
+	width: 100%;
+	margin: 0;
+
+	/*
+		Use relative positioning in order to make the absolute
+		positioning of the bottom-of-viewport-button-large and
+		top-of-viewport-button-large relative to this div’s
+		positioning.
+
+		When position is not set to relative,
+		bottom-of-viewport-button-large does not stop moving up the
+		screen past a screen height of less than 640px.
+	*/
+	position: relative;
+}
+
+.logo-extra-large {
+	/*
+		Use padding instead of margins so that the space is applied
+		inside of the full-window-centered-div, not outside.
+	*/
+	padding-top: 250px;
+
+	margin-top: 0;
+	margin-bottom: 0;
+
+	font-family: Arvo;
+	font-weight: bold;
+	font-size: 144px;
+	text-align: center;
+	color: #61147A;
+	letter-spacing: 12px;
+}
+
+.tagline-extra-large {
+	margin-top: 0;
+
+	font-family: "Helvetica Neue", "Arial", sans-serif;
+	font-weight: 200;
+	font-size: 72px;
+	text-align: center;
+	color: #61147A;
+	letter-spacing: 6px;
+}
+
+.bottom-of-viewport-button-large {
+	position: absolute;
+
+	/*
+		Center the button by moving the left-edge 50% at the middle of
+		the parent, and then moving left half of the button’s width.
+	*/
+	left: 50%;
+	transform: translateX(-50%);
+
+	bottom: 45px;
+}
+
+.top-of-viewport-button-large {
+	position: absolute;
+
+	/*
+		Center the button by moving the left-edge 50% at the middle of
+		the parent, and then moving left half of the button’s width.
+	*/
+	left: 50%;
+	transform: translateX(-50%);
+
+	top: 45px;
+}
+
+.bottom-page-content-container {
+	text-align: center;
+
+	/*
+		Since the top-of-viewport-button-large is taken out of the
+		flow due to absolute positioning, use a value of 195
+		(45 + 70 + 80) px. 45 is taken from the top value of
+		top-of-viewport-button-large, 70 is taken from
+		top-of-viewport-button-large’s height, and 80 is arbitrary.
+	*/
+	padding-top: 195px;
+}
+
+
+.bottom-page-content-container * {
+	/*
+		Set text-align left for all of the children of a
+		bottom-page-content-container.
+
+		NOTE: Not all contents will be aligned-left, because THIS
+		override gets overridden AGAIN by other classes.
+	*/
+	text-align: left;
+
+	/*
+		Align the middle of the description-paragraphs-container and
+		the squarish-panel-large, not the baselines (which is the
+		default).
+	*/
+	vertical-align: middle;
+}
+
+.description-paragraphs-container {
+	width: 670px;
+	height: 420px;
+	padding-right: 35px;
+	padding-top: 105px;
+	padding-bottom: 104px;
+	display: inline-block;
+}
+
+.description-paragraphs-container p {
+	/*
+		Make center-aligned text so that it overrides the
+		left-aligned text from .bottom-page-content-container *.
+	*/
+	text-align: center;
+}
+
+.description-paragraphs-container p:first-child {
+	/*
+		Remove top-margin, so that the description-paragraphs-container
+		div properly fits the paragraphs’ height.
+	*/
+	margin-top: 0;
+}
+
+.squarish-panel-large {
+	display: inline-block;
+}
+
+.squarish-panel-large .label-and-textfield-large-container {
+	margin: 40px 50px;
+}
+
+.squarish-panel-large .button-large {
+	/*
+		Use padding instead of margins so that the space is applied
+		inside of the full-window-centered-div, not outside.
+	*/
+	padding-bottom: 50px;
+	margin: 40px auto 0 auto;
+}
+
+.squarish-panel-large .label-and-textfield-large-container:first-child {
+	/*
+		Use padding instead of margins so that the space is applied
+		inside of the squarish-panel-large, not outside.
+	*/
+	padding-top: 58px;
+	margin-top: 0;
+}
+
+@media screen and (max-width: 1350px) {
+	.description-paragraphs-container {
+		display: block;
+		margin-right: auto;
+		margin-bottom: 20px;
+		margin-left: auto;
+		padding: 0;
+	}
+
+	.squarish-panel-large {
+		display: block;
+		margin-right: auto;
+		margin-bottom: 20px;
+		margin-left: auto;
+		padding: 0;
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.logo-extra-large {
+		font-size: 100px;
+	}
+
+	.tagline-extra-large {
+		font-size: 50px;
+	}
+}
+
+@media screen and (max-width: 770px) {
+	.logo-extra-large {
+		font-size: 72px;
+	}
+
+	.tagline-extra-large {
+		font-size: 36px;
+	}
+
+	.description-paragraphs-container {
+		width: 90%;
+		height: auto;
+	}
+
+
+}
+
+
+@media screen and (max-height: 640px) {
+	.full-window-centered-div {
+		height: 640px;
+	}
+
+	.logo-extra-large {
+		padding-top: 150px;
+	}
+}

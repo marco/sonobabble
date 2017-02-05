@@ -1,0 +1,66 @@
+/* NOTE: This code looks best when viewed with a tab-width of 8. */
+
+@font-face {
+	font-family: Arvo;
+	font-weight: bold;
+	src: url("resources/Arvo-Bold.ttf");
+}
+
+body {
+	background-color: #F4F4F4;
+}
+
+.squarish-panel-large {
+	width: 600px;
+	height: 628px;
+
+	box-shadow: 0 0 1px 0 rgba(0, 0, 23, 50);
+	border-radius: 10px;
+	background-color: #FFFFFF;
+}
+
+.label-and-textfield-large-container label {
+	margin: 0 10px 5px 10px;
+	display: block;
+
+	font-family: "Helvetica Neue", "Arial", sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	letter-spacing: 2px;
+}
+
+.label-and-textfield-large-container input[type="text"],
+	.label-and-textfield-large-container input[type="password"] {
+		margin: 5px 0 0 0;
+		border: 1px solid #BFBFBF;
+		border-radius: 10px;
+		padding: 16px;
+		width: 500px;
+		display: block;
+
+		font-family: "Helvetica Neue", "Arial", sans-serif;
+		font-size: 36px;
+		font-weight: 200;
+		color: #BFBFBF;
+		letter-spacing: 3px
+}
+
+.button-large {
+	border: 0;
+	background-color: transparent;
+	display: block;
+
+	font-family: "Helvetica Neue", "Arial", sans-serif;
+	font-weight: 500;
+	font-size: 64px;
+	letter-spacing: 5.33px;
+	color: #8F00BF;
+	cursor: pointer;
+}
+
+.text-medium {
+	font-family: "Helvetica Neue", "Arial", sans-serif;
+	font-size: 36px;
+	letter-spacing: 3px;
+	color: #3A3A3A;
+}
