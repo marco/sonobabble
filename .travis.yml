@@ -11,3 +11,6 @@ before_script:
         #       properly (because all go test files are inside that folder)
         #
         cd sonobabble
+
+        # Use pwd to check the output the directory
+        pwd
