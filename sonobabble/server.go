@@ -105,12 +105,6 @@ func findAbsoluePath(relativePath string) (string, error) {
 	defaultContext := &build.Default
 
 	/*
-		Find the absolute path of GOPATH, assuming it is the second
-		item in a slice of strings from the SrcDirs method (because
-		GOROOT will be the first).
-	*/
-
-	/*
 		Check to see if a slice of strings that contains source
 		directories for Go packages contains less than 2 items. The
 		first item should be GOROOT and the second item (which is
