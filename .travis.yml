@@ -10,7 +10,7 @@ before_script:
         #       cd into the sonobabble subdirectory so that go test works
         #       properly (because all go test files are inside that folder)
         #
-        cd sonobabble
+        - cd sonobabble
 
         # Use pwd to check the output the directory
-        pwd
+        - pwd
