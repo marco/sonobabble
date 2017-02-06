@@ -4,3 +4,10 @@ go: 1.7.4
 
 install:
     go get github.com/gorilla/mux
+
+before_script:
+        #
+        #       cd into the sonobabble subdirectory so that go test works
+        #       properly (because all go test files are inside that folder)
+        #
+        cd sonobabble
