@@ -4,7 +4,6 @@ package sonobabble
 
 import (
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -14,10 +13,14 @@ func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
 		Get the absolute path string of the sonobabble/sonobabble
 		package.
 	*/
-	var absoluteSonobabblePackagePath =
-		findAbsoluePathOfPackageInGoPath("sonobabble/sonobabble")
+	var absoluteSonobabblePackagePath, absoluteError =
+		findAbsoluePath("sonobabble/sonobabble")
 
-	log.Println(absoluteSonobabblePackagePath)
+	// Check for any errors
+	if absoluteError != nil {
+		panic(absoluteError)
+	}
+
 	// Create the absolute path string for templates/homepage.html.
 	var templatesHomepageAbsolutePath =
 		absoluteSonobabblePackagePath + "templates/homepage.html"
@@ -28,7 +31,7 @@ func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
 
 	// Check for any errors.
 	if parseError != nil {
-		log.Fatal(parseError)
+		panic(parseError)
 	}
 
 	// Write the template to responseWriter.

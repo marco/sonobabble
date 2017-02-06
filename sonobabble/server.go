@@ -3,16 +3,30 @@
 package sonobabble
 
 import (
+	"errors"
 	"github.com/gorilla/mux"
+	"go/build"
 	"log"
 	"net/http"
-	"go/build"
 )
 
-// Serve starts a Sonobabble server.
-func Serve() {
+/*
+	Serve starts a Sonobabble server, and if verbose is true, outputs
+	information on its activity.
+*/
+func Serve(verbose bool) {
+	// Output if needed.
+	if verbose {
+		log.Println("Initializing Gorilla Mux.")
+	}
+
 	// Initialize a pointer to a Gorilla Mux router.
 	router := mux.NewRouter()
+
+	// Output if needed.
+	if verbose {
+		log.Println("Registering / pattern.")
+	}
 
 	// Use showHomepage to handle a / location.
 	router.HandleFunc("/", showHomepage)
@@ -21,8 +35,13 @@ func Serve() {
 		Get the absolute path string of the sonobabble/sonobabble
 		package.
 	*/
-	var absoluteSonobabblePackagePath =
-		findAbsoluePathOfPackageInGoPath("sonobabble/sonobabble")
+	var absoluteSonobabblePackagePath, absoluteError =
+		findAbsoluePath("sonobabble/sonobabble")
+
+	// Check for any errors.
+	if absoluteError != nil {
+		panic(absoluteError)
+	}
 
 	// Create absolute path strings for three useful folders.
 	var templatesAbsolutePath =
@@ -49,24 +68,39 @@ func Serve() {
 	templatesResourcesHandler :=
 		http.FileServer(http.Dir(templatesResourcesAbsolutePath))
 
+	// Output if needed.
+	if verbose {
+		log.Println("Registering path prefixes.")
+	}
+
 	/*
-		Apply the Handlers to Routes created by router.PathPrefix.
+		Apply the Handlers to Routes created by PathPrefix.
 	*/
 	router.PathPrefix("/").Handler(templatesHandler)
 	router.PathPrefix("/installed/").Handler(templatesInstalledHandler)
 	router.PathPrefix("/resources/").Handler(templatesResourcesHandler)
 
+	// Output if needed.
+	if verbose {
+		log.Println("Starting the server.")
+	}
+
 	// Finally, start the server.
 	http.Handle("/", router)
-	http.ListenAndServe(":8080", nil)
+	go http.ListenAndServe(":8080", nil)
+
+	// Output if needed.
+	if verbose {
+		log.Println("Finished starting the server.")
+	}
 }
 
 /*
-	findAbsoluePathOfPackageInGoPath takes in a packageRelativePath string
+	findAbsoluePath takes in a relativePath string
 	that is used as a package location in relation to GOPATH. It returns
-	an absolute path string.
+	an absolute path string and an error if there is one.
 */
-func findAbsoluePathOfPackageInGoPath(packageRelativePath string) string {
+func findAbsoluePath(relativePath string) (string, error) {
 	// Create a pointer to the default Context.
 	defaultContext := &build.Default
 
@@ -75,22 +109,37 @@ func findAbsoluePathOfPackageInGoPath(packageRelativePath string) string {
 		item in a slice of strings from the SrcDirs method (because
 		GOROOT will be the first).
 	*/
-	goPathSrcDir := defaultContext.SrcDirs()[1]
+
+	/*
+		Check to see if a slice of strings that contains source
+		directories for Go packages contains less than 2 items. The
+		first item should be GOROOT and the second item (which is
+		needed) is GOPATH
+	*/
+	if len(defaultContext.SrcDirs()) < 2 {
+		return "", errors.New("sonobabble.findAbsoluePath: the " +
+			"length of the go/build package’s default Context’s " +
+			"SrcDirs slice is less than 2, therefore GOPATH is " +
+			"not included")
+	}
+
+	// Optain the GOPATH location
+	goPathSourceDirectory := defaultContext.SrcDirs()[1]
 
 	// Create a variable equal to the FindOnly build.ImportMode.
 	findOnlyMode := build.FindOnly
 
 	/*
-		Use these variables (and packageRelativePath) to find a pointer
-		to a Package variable of the specified packageRelativePath.
+		Use these variables (and relativePath) to find a pointer
+		to a Package variable of the specified RelativePath.
 	*/
 	foundPackage, foundPackageError :=
-		defaultContext.Import(packageRelativePath,
-		goPathSrcDir, findOnlyMode)
+		defaultContext.Import(relativePath,
+		goPathSourceDirectory, findOnlyMode)
 
 	// Check for any errors.
 	if foundPackageError != nil {
-		log.Fatal(foundPackageError)
+		return "", foundPackageError
 	}
 
 	/*
@@ -100,5 +149,5 @@ func findAbsoluePathOfPackageInGoPath(packageRelativePath string) string {
 	finalDirectory := foundPackage.Dir + "/"
 
 	// Return the directory.
-	return finalDirectory
+	return finalDirectory, nil
 }
