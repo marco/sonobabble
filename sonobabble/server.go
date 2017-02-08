@@ -87,7 +87,7 @@ func Serve(verbose bool) {
 
 	// Finally, start the server.
 	http.Handle("/", router)
-	go http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", nil)
 
 	// Output if needed.
 	if verbose {
@@ -129,7 +129,7 @@ func findAbsoluePath(relativePath string) (string, error) {
 	*/
 	foundPackage, foundPackageError :=
 		defaultContext.Import(relativePath,
-		goPathSourceDirectory, findOnlyMode)
+			goPathSourceDirectory, findOnlyMode)
 
 	// Check for any errors.
 	if foundPackageError != nil {

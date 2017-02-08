@@ -4,16 +4,16 @@ package sonobabble
 
 import (
 	"errors"
-	"testing"
 	"net/http"
 	"net/http/httptest"
+	"testing"
 )
 
 /*
 	TestShowHomepage tests the showHomepage function to see if it properly
 	responds with a status code of 200 to a request.
 */
-func TestShowHomepage(tester *testing.T)  {
+func TestShowHomepage(tester *testing.T) {
 	/*
 		Create a pointer to a new ResponseRecorder (which satisfies
 		ResponseWriter for use in ServeHTTP later).

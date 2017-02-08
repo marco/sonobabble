@@ -9,6 +9,6 @@ import "sonobabble/sonobabble"
 	function of the sonobabble package.
 */
 func main() {
-	// Start the server, without the verbose option.
-	sonobabble.Serve(false)
+	// Start the server, with the verbose option.
+	sonobabble.Serve(true)
 }
