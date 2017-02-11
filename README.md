@@ -36,4 +36,4 @@ installed.
 [march 31 2017 timer]: https://days.to/31-march/2017
 
 [gorilla mux]: https://github.com/gorilla/mux
-[firego]: https://github.com/gorilla/mux
+[firego]: https://github.com/zabawaba99/firego/
