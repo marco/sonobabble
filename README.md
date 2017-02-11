@@ -19,7 +19,8 @@ I have no idea. I’m hoping for [March 31, 2017][march 31 2017 timer] (maybe?).
 
 ## Who?
 Me, primarily. If you somehow stumbled here and want to make a pull request, go
-ahead! Ensure that you have [Gorilla Mux][gorilla mux] installed.
+ahead! Ensure that you have [Gorilla Mux][gorilla mux] and [Firego][firego]
+installed.
 
 [travis badge]: https://travis-ci.org/skunkmb/sonobabble.svg?branch=master
 [travis]: https://travis-ci.org/skunkmb/sonobabble
@@ -35,3 +36,4 @@ ahead! Ensure that you have [Gorilla Mux][gorilla mux] installed.
 [march 31 2017 timer]: https://days.to/31-march/2017
 
 [gorilla mux]: https://github.com/gorilla/mux
+[firego]: https://github.com/gorilla/mux
