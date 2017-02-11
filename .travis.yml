@@ -11,14 +11,16 @@ go: 1.7.4
 go_import_path: sonobabble
 
 install:
-        go get github.com/gorilla/mux
+        # Install required Go packages.
+        - go get github.com/gorilla/mux
+        - go get github.com/zabawaba99/firego/
 
 before_script:
         #
         #       cd into the sonobabble subdirectory so that go test works
-        #       properly (because all go test files are inside that folder)
+        #       properly (because all go test files are inside that folder).
         #
         - cd sonobabble
 
-        # Use pwd to output the directory
+        # Use pwd to output the directory.
         - pwd
