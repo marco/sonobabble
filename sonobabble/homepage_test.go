@@ -18,14 +18,17 @@ func TestShowHomepage(tester *testing.T) {
 		Create a pointer to a new ResponseRecorder (which satisfies
 		ResponseWriter for use in ServeHTTP later).
 	*/
-	responseRecorder := httptest.NewRecorder()
+	var responseRecorder *httptest.ResponseRecorder
+	responseRecorder = httptest.NewRecorder()
 
 	// Create a HandlerFunc equal to showHomepage.
-	showHomepageHandler := http.HandlerFunc(showHomepage)
+	var showHomepageHandler http.HandlerFunc
+	showHomepageHandler = http.HandlerFunc(showHomepage)
 
-	// Create a pointer to a new request to where Sonobabble is hosted.
-	request, requestError := http.NewRequest("GET",
-		"http://localhost:8080", nil)
+	// Create a pointer to an empty request (this doesn’t really matter).
+	var request *http.Request
+	var requestError error
+	request, requestError = http.NewRequest("GET", "", nil)
 
 	// Check for any errors.
 	if requestError != nil {
