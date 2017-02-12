@@ -31,6 +31,8 @@ body {
 
 .label-and-textfield-large-container input[type="text"],
 	.label-and-textfield-large-container input[type="password"] {
+		/* Never display a selected outline. */
+		outline-width: 0;
 		margin: 5px 0 0 0;
 		border: 1px solid #BFBFBF;
 		border-radius: 10px;
@@ -41,11 +43,30 @@ body {
 		font-family: "Helvetica Neue", "Arial", sans-serif;
 		font-size: 36px;
 		font-weight: 200;
-		color: #BFBFBF;
+		color: #3A3A3A;
 		letter-spacing: 3px
 }
 
+.label-and-textfield-large-container
+	input[type="text"]:placeholder-shown,
+	.label-and-textfield-large-container
+	input[type="password"]:placeholder-shown {
+		/*
+			Assign a lighter color only when the placeholder is
+			being displayed.
+		*/
+		color: #BFBFBF;
+}
+
+.label-and-textfield-large-container input[type="text"]:focus,
+	.label-and-textfield-large-container input[type="password"]:focus {
+		border-color: #61147A;
+}
+
 .button-large {
+	/* Never display a selected outline. */
+	outline-width: 0;
+
 	border: 0;
 	background-color: transparent;
 	display: block;
@@ -56,6 +77,10 @@ body {
 	letter-spacing: 5.33px;
 	color: #8F00BF;
 	cursor: pointer;
+}
+
+.button-large:hover {
+	color: #61147A;
 }
 
 .text-medium {
