@@ -9,12 +9,12 @@ import (
 
 // showHomepage writes the website’s homepage to responseWriter.
 func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
-	/*
-		Get the absolute path string of the sonobabble/sonobabble
-		package.
-	*/
-	var absoluteSonobabblePackagePath, absoluteError =
-		findAbsoluePath("sonobabble/sonobabble")
+	// Get the absolute path string of the sonobabble/sonobabble package.
+	var (
+		absoluteSonobabblePackagePath string
+		absoluteError                 error
+	)
+	absoluteSonobabblePackagePath, absoluteError = findAbsoluePath("sonobabble/sonobabble")
 
 	// Check for any errors
 	if absoluteError != nil {
@@ -22,12 +22,14 @@ func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
 	}
 
 	// Create the absolute path string for templates/homepage.html.
-	var templatesHomepageAbsolutePath =
-		absoluteSonobabblePackagePath + "templates/homepage.html"
+	var templatesHomepageAbsolutePath string = absoluteSonobabblePackagePath + "templates/homepage.html"
 
 	// Create a pointer to a new Template with the path.
-	template, parseError :=
-		template.ParseFiles(templatesHomepageAbsolutePath)
+	var (
+		template   *template.Template
+		parseError error
+	)
+	template, parseError = template.ParseFiles(templatesHomepageAbsolutePath)
 
 	// Check for any errors.
 	if parseError != nil {

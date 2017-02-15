@@ -10,14 +10,11 @@ import (
 )
 
 /*
-	TestShowHomepage tests the showHomepage function to see if it properly
-	responds with a status code of 200 to a request.
+	TestShowHomepage tests the showHomepage function to see if it properly responds with a status code of 200 to a
+	request.
 */
 func TestShowHomepage(tester *testing.T) {
-	/*
-		Create a pointer to a new ResponseRecorder (which satisfies
-		ResponseWriter for use in ServeHTTP later).
-	*/
+	// Create a pointer to a new ResponseRecorder (which satisfies ResponseWriter for use in ServeHTTP later).
 	var responseRecorder *httptest.ResponseRecorder
 	responseRecorder = httptest.NewRecorder()
 
@@ -40,8 +37,7 @@ func TestShowHomepage(tester *testing.T) {
 
 	// Check to see if the status code is okay.
 	if responseRecorder.Code != http.StatusOK {
-		tester.Fatal(errors.New("TestShowHomepage: " +
-			"recieved status code is not equal to 200"))
+		tester.Fatal(errors.New("sonobabble.TestShowHomepage: recieved status code is not equal to 200"))
 	}
 
 }
