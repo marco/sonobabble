@@ -1,5 +1,3 @@
-// NOTE: This code looks best when viewed with a tab-width of 8.
-
 package sonobabble
 
 import (
