@@ -31,7 +31,7 @@ func Serve(verbose bool) {
 		templatesAbsolutePath string
 		absoluteError                 error
 	)
-	templatesAbsolutePath, absoluteError = findAbsoluePath("sonobabble/templates")
+	templatesAbsolutePath, absoluteError = findAbsolutePath("sonobabble/templates")
 
 	if absoluteError != nil {
 		panic(absoluteError)
@@ -67,11 +67,11 @@ func Serve(verbose bool) {
 }
 
 /*
-	findAbsoluePath returns an absolute path that is based on a relative path in relation to the current working
+	findAbsolutePath returns an absolute path that is based on a relative path in relation to the current working
 	directory, or an error if there is one. Slashes are added automatically for ease of use, so calling
-	findAbsoluePath(/foo) is the same as calling findAbsoluePath(foo).
+	findAbsolutePath(/foo) is the same as calling findAbsolutePath(foo).
 */
-func findAbsoluePath(relativePath string) (string, error) {
+func findAbsolutePath(relativePath string) (string, error) {
 	var (
 		workingDirectory string
 		directoryError error

@@ -2,14 +2,6 @@ language: go
 
 go: 1.7.4
 
-#
-#       Set a specific go_import_path in order to change the location inside
-#       $GOPATH/src from github.com/skunkmb/sonobabble to just sonobabble.
-#       This is needed so that templates found through a package import in
-#       findAbsoluePath are properly located.
-#
-go_import_path: sonobabble
-
 install:
         # Install required Go packages.
         - go get github.com/gorilla/mux

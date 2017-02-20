@@ -11,7 +11,7 @@ func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
 		homepageAbsolutePath string
 		absoluteError                 error
 	)
-	homepageAbsolutePath, absoluteError = findAbsoluePath("sonobabble/templates/homepage.html")
+	homepageAbsolutePath, absoluteError = findAbsolutePath("sonobabble/templates/homepage.html")
 
 	if absoluteError != nil {
 		panic(absoluteError)
