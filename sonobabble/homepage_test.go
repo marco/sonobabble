@@ -13,11 +13,11 @@ import (
 */
 func TestShowHomepage(tester *testing.T) {
 	var responseRecorder *httptest.ResponseRecorder = httptest.NewRecorder()
-	var showHomepageHandler http.HandlerFunc= http.HandlerFunc(showHomepage)
+	var showHomepageHandler http.HandlerFunc = http.HandlerFunc(showHomepage)
 
 	// Create an empty request (this doesn’t really matter).
 	var (
-		request *http.Request
+		request      *http.Request
 		requestError error
 	)
 	request, requestError = http.NewRequest("GET", "", nil)

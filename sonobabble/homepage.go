@@ -9,9 +9,9 @@ import (
 func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
 	var (
 		homepageAbsolutePath string
-		absoluteError                 error
+		absoluteError        error
 	)
-	homepageAbsolutePath, absoluteError = findAbsolutePath("sonobabble/templates/homepage.html")
+	homepageAbsolutePath, absoluteError = findAbsolutePath("sonobabble/sonobabble/templates/homepage.html")
 
 	if absoluteError != nil {
 		panic(absoluteError)

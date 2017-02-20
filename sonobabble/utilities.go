@@ -29,9 +29,9 @@ func Serve(verbose bool) {
 	*/
 	var (
 		templatesAbsolutePath string
-		absoluteError                 error
+		absoluteError         error
 	)
-	templatesAbsolutePath, absoluteError = findAbsolutePath("sonobabble/templates")
+	templatesAbsolutePath, absoluteError = findAbsolutePath("sonobabble/sonobabble/templates")
 
 	if absoluteError != nil {
 		panic(absoluteError)
@@ -67,24 +67,15 @@ func Serve(verbose bool) {
 }
 
 /*
-	findAbsolutePath returns an absolute path that is based on a relative path in relation to the current working
-	directory, or an error if there is one. Slashes are added automatically for ease of use, so calling
+	findAbsolutePath returns an absolute path that is based on a relative path in relation to the src directory in
+	GOPATH, or an error if there is one. Slashes are added automatically for ease of use, so calling
 	findAbsolutePath(/foo) is the same as calling findAbsolutePath(foo).
+
+	In other words, findAbsolutePath(foo) will return the absolute path of GOPATH/src/foo.
 */
 func findAbsolutePath(relativePath string) (string, error) {
-	var (
-		workingDirectory string
-		directoryError error
-	)
-	workingDirectory, directoryError = os.Getwd()
+	var goPath string = os.Getenv("GOPATH")
 
-	if directoryError != nil {
-		return "", directoryError
-	}
-
-	/*
-		Join the working directory and the relative path, with an added slashe for good measure, then return
-		the result.
-	*/
-	return workingDirectory + "/" + relativePath, nil
+	// Join the GOPATH with the src directory and the relative path, then return the result.
+	return goPath + "/src/" + relativePath, nil
 }
