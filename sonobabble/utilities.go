@@ -1,6 +1,7 @@
 package sonobabble
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -31,7 +32,7 @@ func Serve(verbose bool) {
 		templatesAbsolutePath string
 		absoluteError         error
 	)
-	templatesAbsolutePath, absoluteError = findAbsolutePath("sonobabble/sonobabble/templates")
+	templatesAbsolutePath, absoluteError = findAbsolutePath("sonobabble/sonobabble/templates/")
 
 	if absoluteError != nil {
 		panic(absoluteError)
@@ -68,14 +69,36 @@ func Serve(verbose bool) {
 
 /*
 	findAbsolutePath returns an absolute path that is based on a relative path in relation to the src directory in
-	GOPATH, or an error if there is one. Slashes are added automatically for ease of use, so calling
+	$GOPATH, or an error if there is one. If a path does not exist in $GOPATH/src/, then
+	$GOPATH/src/github.com/skunkmb is tried. Slashes are added automatically for ease of use, so calling
 	findAbsolutePath(/foo) is the same as calling findAbsolutePath(foo).
 
-	In other words, findAbsolutePath(foo) will return the absolute path of GOPATH/src/foo.
+	In other words, findAbsolutePath(foo/bar) will return the absolute path of $GOPATH/src/foo/bar, or
+	$GOPATH/src/github.com/skunkmb/foo/bar if the former is not available, or an error.
 */
 func findAbsolutePath(relativePath string) (string, error) {
 	var goPath string = os.Getenv("GOPATH")
 
-	// Join the GOPATH with the src directory and the relative path, then return the result.
-	return goPath + "/src/" + relativePath, nil
+	var defaultAbsolutePath = goPath + "/src/" + relativePath
+	var gitHubAbsolutePath = goPath + "/src/github.com/skunkmb/" + relativePath
+
+	// os.Stat returns information on a file, or an error if it doesn’t exist.
+	var defaultExistsError error
+	_, defaultExistsError = os.Stat(defaultAbsolutePath)
+
+	// Check to see if the error is (not isn’t) equal to nil, meaning that the file or directory does exist.
+	if defaultExistsError == nil {
+		return defaultAbsolutePath, nil
+	}
+
+	var gitHubExistsError error
+	_, gitHubExistsError = os.Stat(defaultAbsolutePath)
+
+	if gitHubExistsError == nil {
+		return gitHubAbsolutePath, nil
+	}
+
+	// If both fail, issue an error.
+	return "", fmt.Errorf("sonobabble.findAbsolutePath %s: neither $GOPATH/src/%s nor " +
+		"$GOPATH/src/github.com/skunkmb/%s exists")
 }
