@@ -5,35 +5,29 @@ import (
 	"net/http"
 )
 
-// showHomepage writes the website’s homepage to responseWriter.
+// showHomepage writes the website’s homepage to a response writer.
 func showHomepage(responseWriter http.ResponseWriter, request *http.Request) {
-	// Get the absolute path string of the sonobabble/sonobabble package.
 	var (
-		absoluteSonobabblePackagePath string
+		homepageAbsolutePath string
 		absoluteError                 error
 	)
-	absoluteSonobabblePackagePath, absoluteError = findAbsoluePath("sonobabble/sonobabble")
+	homepageAbsolutePath, absoluteError = findAbsoluePath("sonobabble/templates/homepage.html")
 
-	// Check for any errors
 	if absoluteError != nil {
 		panic(absoluteError)
 	}
 
-	// Create the absolute path string for templates/homepage.html.
-	var templatesHomepageAbsolutePath string = absoluteSonobabblePackagePath + "templates/homepage.html"
-
-	// Create a pointer to a new Template with the path.
+	// Create a pointer to a new template with the parsed path.
 	var (
 		template   *template.Template
 		parseError error
 	)
-	template, parseError = template.ParseFiles(templatesHomepageAbsolutePath)
+	template, parseError = template.ParseFiles(homepageAbsolutePath)
 
-	// Check for any errors.
 	if parseError != nil {
 		panic(parseError)
 	}
 
-	// Write the template to responseWriter.
+	// Write the template to the response writer.
 	template.Execute(responseWriter, "")
 }
