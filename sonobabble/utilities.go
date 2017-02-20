@@ -86,19 +86,19 @@ func findAbsolutePath(relativePath string) (string, error) {
 	var defaultExistsError error
 	_, defaultExistsError = os.Stat(defaultAbsolutePath)
 
-	// Check to see if the error is (not isn’t) equal to nil, meaning that the file or directory does exist.
-	if defaultExistsError == nil {
-		return defaultAbsolutePath, nil
-	}
-
 	var gitHubExistsError error
-	_, gitHubExistsError = os.Stat(defaultAbsolutePath)
+	_, gitHubExistsError = os.Stat(gitHubAbsolutePath)
 
-	if gitHubExistsError == nil {
+	// Check to see either one exists, then return the one that does.
+	if defaultExistsError == nil || gitHubExistsError == nil {
+		if defaultExistsError == nil {
+			return defaultAbsolutePath, nil
+		}
+
 		return gitHubAbsolutePath, nil
 	}
 
-	// If both fail, issue an error.
-	return "", fmt.Errorf("sonobabble.findAbsolutePath %s: neither $GOPATH/src/%s nor " +
-		"$GOPATH/src/github.com/skunkmb/%s exists")
+	// If both fail, issue an error for both.
+	return "", fmt.Errorf("sonobabble.findAbsolutePath %[1]s: %[2]s\n sonobabble.findAbsolutePath %[1]s: %[3]s\n",
+		relativePath, defaultExistsError, gitHubExistsError)
 }
