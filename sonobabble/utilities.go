@@ -80,15 +80,19 @@ func Serve(verbose bool) {
 func findAbsolutePath(relativePath string) (string, error) {
 	var goPath string = os.Getenv("GOPATH")
 
+	if goPath == "" {
+		return "", fmt.Errorf("sonobabble.findAbsolutePath %1s: $GOPATH is an empty string", relativePath)
+	}
+
 	var absolutePath = goPath + "/src/" + relativePath
 
 	// os.Stat returns information on a file, or an error if it doesn’t exist.
 	var existsError error
 	_, existsError = os.Stat(absolutePath)
 
-	if existsError == nil {
-		return absolutePath, nil
+	if existsError != nil {
+		return "", fmt.Errorf("sonobabble.findAbsolutePath %1s: %2s", relativePath, existsError)
 	}
 
-	return "", fmt.Errorf("sonobabble.findAbsolutePath %1s: %2s", relativePath, existsError)
+	return absolutePath, nil
 }
