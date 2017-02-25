@@ -42,8 +42,8 @@ func Serve(verbose bool) error {
 	templatesAbsolutePath, absoluteError = findAbsolutePath("github.com/skunkmb/sonobabble/sonobabble/templates/")
 
 	if absoluteError != nil {
-		return fmt.Errorf("findAbsolutePath %s: %s", "github.com/skunkmb/sonobabble/sonobabble/templates/",
-			absoluteError)
+		return fmt.Errorf("sonobabble.findAbsolutePath %s: %s",
+			"github.com/skunkmb/sonobabble/sonobabble/templates/", absoluteError)
 	}
 
 	/*

@@ -23,14 +23,14 @@ func TestShowHomepage(tester *testing.T) {
 	request, requestError = http.NewRequest("GET", "", nil)
 
 	if requestError != nil {
-		tester.Fatal(requestError)
+		tester.Fatalf("http.NewRequest: %s", requestError)
 	}
 
 	// Make the request.
 	showHomepageHandler.ServeHTTP(responseRecorder, request)
 
 	if responseRecorder.Code != http.StatusOK {
-		tester.Fatal(errors.New("recieved status code is not equal to 200"))
+		tester.Fatal("recieved status code is not equal to 200")
 	}
 
 }

@@ -1,6 +1,7 @@
 package sonobabble
 
 import (
+	"fmt"
 	"math/rand"
 	"net/http"
 	"os"
@@ -65,7 +66,7 @@ func TestFindAbsolutePath(tester *testing.T) {
 	testGoPath, pathError = generateRandomGoPath()
 
 	if pathError != nil {
-		tester.Fatalf("generateRandomGoPath: %s", pathError)
+		tester.Fatalf("sonobabble.generateRandomGoPath: %s", pathError)
 	}
 
 	os.Setenv("GOPATH", testGoPath)
@@ -94,7 +95,7 @@ func TestFindAbsolutePath(tester *testing.T) {
 	foundAbsolutePath, absoluteError = findAbsolutePath(testFolderRelativePath)
 
 	if absoluteError != nil {
-		tester.Errorf("findAbsolutePath %s: %s", testFolderRelativePath, absoluteError)
+		tester.Errorf("sonobabble.findAbsolutePath %s: %s", testFolderRelativePath, absoluteError)
 
 		// Reset $GOPATH to its original value, and delete the test $GOPATH folder.
 		os.Setenv("GOPATH", originalGoPath)
@@ -109,8 +110,8 @@ func TestFindAbsolutePath(tester *testing.T) {
 	}
 
 	if testFolderAbsolutePath != foundAbsolutePath {
-		tester.Errorf("expected %s from findAbsolutePath %s but recieved %s", testFolderAbsolutePath,
-			testFolderRelativePath, foundAbsolutePath)
+		tester.Errorf("expected %s from sonobabble.findAbsolutePath %s but recieved %s",
+			testFolderAbsolutePath, testFolderRelativePath, foundAbsolutePath)
 
 		// Reset $GOPATH to its original value, and delete the test $GOPATH folder.
 		os.Setenv("GOPATH", originalGoPath)
@@ -161,7 +162,7 @@ func generateRandomGoPath() (string, error) {
 		}
 
 		// If there is an error, but not one about the directory not existing, return the error.
-		return "", existsError
+		return "", fmt.Errorf("os.Stat %s: %s", newGoPath, existsError)
 	}
 
 	// If there is no error, that means that the directory is already taken. Therefore, try again.
