@@ -119,7 +119,7 @@ func TestFindAbsolutePath(tester *testing.T) {
 
 		if removeError != nil {
 			// If there is an error when removing, issue an error to be shown after the first error.
-			tester.Errorf("os.RemoveAll %s: %s", testFolderRelativePath, absoluteError)
+			tester.Errorf("os.RemoveAll %s: %s", testFolderRelativePath, removeError)
 		}
 
 		tester.FailNow()
@@ -131,7 +131,7 @@ func TestFindAbsolutePath(tester *testing.T) {
 
 	if removeError != nil {
 		// If there is an error when removing, issue an error and fail the test.
-		tester.Fatalf("os.RemoveAll %s: %s", testFolderRelativePath, absoluteError)
+		tester.Fatalf("os.RemoveAll %s: %s", testFolderRelativePath, removeError)
 	}
 }
 
