@@ -432,7 +432,7 @@ func main() {
 
 Please note that these rules are not set in stone, and are very likely to change.
 
-[readme]: ,,/README.md
+[readme]: ../README.md
 [go website]: https://golang.org
 [go github]: https://github.com/golang/go
 [gorilla mux]: https://github.com/gorilla/mux
