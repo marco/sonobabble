@@ -2,6 +2,7 @@ package sonobabble
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -9,8 +10,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Serve starts a Sonobabble server, and outputs information on its activity if using the verbose option.
-func Serve(verbose bool) {
+/*
+	Serve starts a Sonobabble server, outputs information on its activity if using the verbose option, and returns
+	an error if there is one.
+*/
+func Serve(verbose bool) error {
 	if verbose {
 		log.Println("Initializing Gorilla Mux.")
 	}
@@ -38,7 +42,8 @@ func Serve(verbose bool) {
 	templatesAbsolutePath, absoluteError = findAbsolutePath("github.com/skunkmb/sonobabble/sonobabble/templates/")
 
 	if absoluteError != nil {
-		panic(absoluteError)
+		return fmt.Errorf("findAbsolutePath %s: %s", "github.com/skunkmb/sonobabble/sonobabble/templates/",
+			absoluteError)
 	}
 
 	/*
@@ -65,9 +70,8 @@ func Serve(verbose bool) {
 	http.Handle("/", router)
 	http.ListenAndServe(":8080", nil)
 
-	if verbose {
-		log.Println("Finished starting the server.")
-	}
+	// Although this return will never be reached, it is required in order to avoid an error, so return nil.
+	return nil
 }
 
 /*
