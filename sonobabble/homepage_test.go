@@ -30,7 +30,7 @@ func TestShowHomepage(tester *testing.T) {
 	showHomepageHandler.ServeHTTP(responseRecorder, request)
 
 	if responseRecorder.Code != http.StatusOK {
-		tester.Fatal(errors.New("sonobabble.TestShowHomepage: recieved status code is not equal to 200"))
+		tester.Fatal(errors.New("recieved status code is not equal to 200"))
 	}
 
 }

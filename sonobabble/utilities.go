@@ -1,7 +1,7 @@
 package sonobabble
 
 import (
-	"fmt"
+	"errors"
 	"log"
 	"net/http"
 	"os"
@@ -81,17 +81,20 @@ func findAbsolutePath(relativePath string) (string, error) {
 	var goPath string = os.Getenv("GOPATH")
 
 	if goPath == "" {
-		return "", fmt.Errorf("sonobabble.findAbsolutePath %1s: $GOPATH is an empty string", relativePath)
+		return "", errors.New("$GOPATH is an empty string")
 	}
 
 	var absolutePath = goPath + "/src/" + relativePath
 
-	// os.Stat returns information on a file, or an error if it doesn’t exist.
+	/*
+		Ensure that the absolute path exists by using os.Stat, which returns information on a file, or an error
+		if it doesn’t exist or a problem occurs.
+	*/
 	var existsError error
 	_, existsError = os.Stat(absolutePath)
 
 	if existsError != nil {
-		return "", fmt.Errorf("sonobabble.findAbsolutePath %1s: %2s", relativePath, existsError)
+		return "", existsError
 	}
 
 	return absolutePath, nil
