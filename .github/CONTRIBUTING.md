@@ -76,38 +76,38 @@ to more closely align to [GoDoc][godoc]’s standards. Bullet points made from h
 Do
 
 > Change foobar to baz instead of qux
-
+>
 > Call foobar with baz set to true, so that in the future qux, barbaz, and  
 > foobaz won’t happen. Do this for three main reasons:
-
+>
 >  &nbsp;1\. Lorem ipsum.
-
+>
 >  &nbsp;2\. Dolor sit amet.
-
+>
 >  &nbsp;3\. Consectetur adipiscing elit.
-
+>
 > Also do it for two other reasons:
-
+>
 >  &nbsp;\- Quisque euismod
-
+>
 >  &nbsp;\- Lorem et lobortis
 
 instead of
 
 > Change \`foobar\` to \`baz\` instead of \`qux\`
-
+>
 > \# Call \`foobar\` with \`baz\` set to true, so that in the future \`qux\`,  
 > \`barbaz\`, and \`foobaz\` won’t happen. Do this for  
 > \[three main reasons](https://foobarqux.net):
-
+>
 >  &nbsp;1\. Lorem ipsum.
-
+>
 >  &nbsp;2\. Dolor sit amet.
-
+>
 >  &nbsp;3\. Consectetur adipiscing elit.
-
+>
 > _Also do it for two other reasons_:
-
+>
 >  &nbsp;\- Quisque euismod
 >
 >  &nbsp;\- Lorem et lobortis
@@ -145,19 +145,19 @@ Markdown.
 
 Do
 > Change foobar to baz instead of qux
-
+>
 > ### Call `foobar` with `baz` set to true, so that in the future `qux`, `barbaz`, and `foobaz` won’t happen.
 >
 > Do this for [three main reasons](https://foobarqux.net):
-
+>
 >  1. Lorem ipsum.
-
+>
 >  2. Dolor sit amet.
-
+>
 >  3. Consectetur adipiscing elit.
-
+>
 > _Also do it for two other reasons_:
-
+>
 >  - Quisque euismod
 >
 >  - Lorem et lobortis
@@ -165,10 +165,10 @@ Do
 instead of
 
 > Change `foobar` to `baz` instead of `qux`
-
+>
 > Call foobar with baz set to true, so that in the future qux, barbaz, and foobaz won’t happen. Do this for three
 > main reasons: lorem ipsum, dolor sit amet, and consectetur adipiscing elit.
-
+>
 > Also do it for two other reasons: quisque euismod, and lorem et lobortis.
 
 ### 2. _Do not_ wrap the body at 72 characters
@@ -179,43 +179,43 @@ body, because it is seen in a web browser, not a 80-character-wide terminal.
 Do
 
 > Change foobar to baz instead of qux
-
+>
 > ### Call `foobar` with `baz` set to true, so that in the future `qux`, `barbaz`, and `foobaz` won’t happen.
 >
 > Do this for [three main reasons](https://foobarqux.net):
-
+>
 >  1. Lorem ipsum.
-
+>
 >  2. Dolor sit amet.
-
+>
 >  3. Consectetur adipiscing elit.
-
+>
 > _Also do it for two other reasons_:
-
+>
 >  - Quisque euismod
-
+>
 >  - Lorem et lobortis
 
 instead of
 
 > Change foobar to baz instead of qux
-
+>
 > ### Call `foobar` with `baz` set to true, so that in the future  
 > `qux`, `barbaz`, and `foobaz` won’t happen.
 >
 > Do this for  
 > [three main reasons](https://foobarqux.net):
-
+>
 >  1. Lorem ipsum.
-
+>
 >  2. Dolor sit amet.
-
+>
 >  3. Consectetur adipiscing elit.
-
+>
 > _Also do it for two other reasons_:
-
+>
 >  - Quisque euismod
-
+>
 >  - Lorem et lobortis
 
 ## Making an issue
@@ -263,19 +263,25 @@ call the `error` `statError`.
 
 Although this may seem very inconvenient, _always_ use explicit variable types. _Never_ say something like
 
-	foo := bar()
+```golang
+foo := bar()
+```
 
 because at first glance, there is no way to know what `bar` returns. Instead, say
 
-	var foo string = bar()
+```golang
+var foo string = bar()
+```
 
 Also, for functions that return multiple values, use the `var()` syntax. For example,
 
-	var (
-		foo      string
-		fooError error
-	)
-	foo, fooError = bar()
+```golang
+var (
+	foo      string
+	fooError error
+)
+foo, fooError = bar()
+```
 
 ## 3. Commenting
 
@@ -284,29 +290,39 @@ asterisk, so that comments can be easily edited later.
 
 Do
 
-	// fooBar lorem ipsum dolor sit amet.
+```golang
+// fooBar lorem ipsum dolor sit amet.
+```
 
 or
 
+```golang
 	/*
 		fooBar Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
 		labore et dolore magna aliqua. Ut enim ad minim veniam.
-	\*/
+	*/
+```
 
 but not
 
-	/* fooBar lorem ipsum dolor sit amet. \*/
+```golang
+/* fooBar lorem ipsum dolor sit amet. */
+```
 
 or
 
-	/*
-		fooBar lorem ipsum dolor sit amet.
-	\*/
+```golang
+/*
+	fooBar lorem ipsum dolor sit amet.
+*/
+```
 
 or
 
-	// fooBar Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-	// labore et dolore magna aliqua. Ut enim ad minim veniam.
+```golang
+// fooBar Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+// labore et dolore magna aliqua. Ut enim ad minim veniam.
+```
 
 Also, _never_ use backticks or other Markdown in comments. Follow [GoDoc][godoc]’s guide on documentation comments
 (start with the function or variable’s name, end with a period, et cetera).
@@ -319,54 +335,62 @@ parameter or return value. Instead, they should be in “human-speak.”
 
 Do
 
-	// foo returns a number that is equal to a given number plus 1.
-	func foo(uint8 numberToReturn) uint8 {
-		return numberToReturn + 1
-	}
+```golang
+// foo returns a number that is equal to a given number plus 1.
+func foo(uint8 numberToReturn) uint8 {
+	return numberToReturn + 1
+}
+```
 
 instead of
 
-	// foo returns uint8 numberToReturn + 1.
-	func foo(uint8 numberToReturn) uint8 {
-		return numberToReturn
-	}
+```golang
+// foo returns uint8 numberToReturn + 1.
+func foo(uint8 numberToReturn) uint8 {
+	return numberToReturn
+}
+```
 
 Lastly, use comments when needed, but not crazily. Comments should refer to the code that is under the comment without
 any newlines between them, or the entirety of a statement it is directly under the comment. For example,
 
-	// This comment applies to foo and bar, but not baz or the if statement.
-	foo()
-	bar()
+```golang
+// This comment applies to foo and bar, but not baz or the if statement.
+foo()
+bar()
 
-	baz()
+baz()
 
-	// This comment applies to the if statement and all of its contents (qux, bazbar, and the return statement).
-	if true {
-		// This comment only applies to qux.
-		qux()
+// This comment applies to the if statement and all of its contents (qux, bazbar, and the return statement).
+if true {
+	// This comment only applies to qux.
+	qux()
 
-		// This comment only applies to bazbar and the return.
-		bazbar()
-		return true
-	}
+	// This comment only applies to bazbar and the return.
+	bazbar()
+	return true
+}
+```
 
 ## 4. Error messages
 
 Returned error messages should start with a _lowercase_ letter and _not_ end with a period. They should also _not_
 start with the name of the function. Instead, the name should be added by the parent function. For example,
 
-	func getErrorMessage() error {
-		return errors.New("received a reason to return an error")
-	}
+```golang
+func getErrorMessage() error {
+	return errors.New("received a reason to return an error")
+}
 
-	func main() {
-		var getError error = getErrorMessage()
+func main() {
+	var getError error = getErrorMessage()
 
-		if getError != nil {
-			// Add the name of the function to the error message after-the-fact.
-			panic("getErrorMessage: %s", getError)
-		}
+	if getError != nil {
+		// Add the name of the function to the error message after-the-fact.
+		panic("getErrorMessage: %s", getError)
 	}
+}
+```
 
 ## Statements
 
@@ -375,28 +399,32 @@ it, _unless_ it is the first or statement in a parent statement.
 
 Do
 
-	func main() {
-		if foo {
-			bar()
-		}
-
-		if baz {
-			qux()
-		}
+```golang
+func main() {
+	if foo {
+		bar()
 	}
+
+	if baz {
+		qux()
+	}
+}
+```
 
 instead of
 
-	func main() {
+```golang
+func main() {
 
-		if foo {
-			bar()
-		}
-		if baz {
-			qux()
-		}
-
+	if foo {
+		bar()
 	}
+	if baz {
+		qux()
+	}
+
+}
+```
 
 # Conclusion
 
